@@ -7,9 +7,11 @@ use Cake\Core\Configure;
 use Cake\Log\Log;
 use Cake\Network\Request;
 use Cake\Network\Response;
+use Cake\ORM\TableRegistry;
 use Cake\Utility\Security;
+
 use Exception;
-use QuanKim\PhpJWT\JWT;
+use QuanKim\PhpJwt\JWT;
 
 /**
  * An authentication adapter for authenticating using JSON Web Tokens.
@@ -122,7 +124,6 @@ class JwtAuthenticate extends BaseAuthenticate
     public function getUser(Request $request)
     {
         $payload = $this->getPayload($request);
-
         if (!$this->_config['queryDatasource']) {
             return json_decode(json_encode($payload), true);
         }
@@ -160,7 +161,11 @@ class JwtAuthenticate extends BaseAuthenticate
         if ($token) {
             $payload = $this->_decode($token);
         }
-
+        // Check xem token co trong database hay khong
+        $table = TableRegistry::get('AuthToken');
+        $user = (isset($payload->sub)) ? $table->find('all')->where(['user_id'=>$payload->sub,'access_token'=>$token])->toArray() : [];
+        if (count($user) == 0)
+            return null;
         return $this->_payload = $payload;
     }
 
