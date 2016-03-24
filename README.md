@@ -1,5 +1,5 @@
 # cakephp-jwt-auth
-Clone and custom cakephp 3 jwt auth from https://github.com/QuanKim/cakephp-jwt-auth
+Clone and custom cakephp 3 jwt auth from https://github.com/ADmad/cakephp-jwt-auth
 Thanks for @ADmad
 
 # QuanKim/JwtAuth custom plugin for CakePHP
