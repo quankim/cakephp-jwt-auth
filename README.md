@@ -3,7 +3,10 @@ Clone and custom cakephp 3 jwt auth from https://github.com/ADmad/cakephp-jwt-au
 Thanks for @ADmad
 
 # QuanKim/JwtAuth custom plugin for CakePHP
-
+[![Build Status](https://img.shields.io/travis/QuanKim/cakephp-jwt-auth/master.svg?style=flat-square)](https://travis-ci.org/QuanKim/cakephp-jwt-auth)
+[![Coverage](https://img.shields.io/codecov/c/github/QuanKim/cakephp-jwt-auth.svg?style=flat-square)](https://codecov.io/github/QuanKim/cakephp-jwt-auth)
+[![Total Downloads](https://img.shields.io/packagist/dt/QuanKim/cakephp-jwt-auth.svg?style=flat-square)](https://packagist.org/packages/QuanKim/cakephp-jwt-auth)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.txt)
 ## Installation
 
 You can install this plugin into your CakePHP application using [composer](http://getcomposer.org).
