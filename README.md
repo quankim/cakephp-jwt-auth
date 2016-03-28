@@ -31,7 +31,10 @@ or using cake's console:
 ```sh
 ./bin/cake plugin load QuanKim/JwtAuth
 ```
-
+Migrate AuthToken table:
+```sh
+./bin/cake migrations migrate -p QuanKim/JwtAuth
+```
 ## Configuration:
 
 Setup `AuthComponent`:
@@ -70,6 +73,13 @@ Setup `AuthComponent`:
     }
 ```
 
+Setup `Config/app.php`
+Add in bottom of file:
+```php
+'AuthToken'=>[
+        'expire'=>3600
+    ]
+```
 ## Working
 
 The authentication class checks for the token in two locations:
@@ -107,6 +117,17 @@ lib, which this plugin depends on, to generate tokens.
 **The payload should have the "sub" (subject) claim whos value is used to query the
 Users model and find record matching the "id" field.**
 
+Example:
+```php
+$access_token = JWT::encode([
+                'sub' => $user['id'],
+                'exp' =>  time() + $expire
+            ],Security::salt());
+$refresh_token = JWT::encode([
+                'sub' => $user['id'],
+                'ref'=>time()
+            ],Security::salt());
+```
 You can set the `queryDatasource` option to `false` to directly return the token's
 payload as user info without querying datasource for matching user record.
 
