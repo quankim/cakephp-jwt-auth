@@ -127,6 +127,22 @@ $refresh_token = JWT::encode([
                 'sub' => $user['id'],
                 'ref'=>time()
             ],Security::salt());
+$authToken = $this->Users->AuthToken->newEntity();
+$authToken->user_id = $user['id'];
+$authToken->access_token = $access_token;
+$authToken->refresh_token = $refresh_token;
+$this->Users->AuthToken->save($authToken);
+$this->set([
+    'success' => true,
+    'data' => [
+        'access_token' => $access_token,
+        'refresh_token'=> $refresh_token,
+        'id'=>$user['id'],
+        'username'=> $user['username'],
+        'email'=> $user['email']
+    ],
+    '_serialize' => ['success', 'data']
+]);
 ```
 You can set the `queryDatasource` option to `false` to directly return the token's
 payload as user info without querying datasource for matching user record.
