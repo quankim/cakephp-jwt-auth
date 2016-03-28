@@ -131,7 +131,6 @@ class JwtAuthenticate extends BaseAuthenticate
         if (!isset($payload->sub)) {
             return false;
         }
-        Log::alert($payload);
         $user = $this->_findUser($payload->sub);
         if (!$user) {
             return false;
